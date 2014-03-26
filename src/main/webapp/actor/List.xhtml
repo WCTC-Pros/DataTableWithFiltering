@@ -11,27 +11,33 @@
             <h:outputText value="#{bundle.ListActorTitle}"/>
         </ui:define>
         <ui:define name="body">
+            
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            
             <h:form>
                 <p:dataTable id="actorTable" var="actor" value="#{actorBean.actors}"
-                             paginator="true" rows="10" rowsPerPageTemplate="10,20,25" pageLinks="5">
+                             paginator="true" rows="10" rowsPerPageTemplate="10,20,25" 
+                             pageLinks="5" sortMode="multiple">
                     <f:facet name="header">
                         <h:outputText value="Actor Data"/>
                     </f:facet>
-                    <p:column headerText="Id">  
+                    <p:column headerText="Id" sortBy="actorId">  
                         <h:outputText value="#{actor.actorId}" />  
-                    </p:column>  
+                    </p:column>
                     
-                    <p:column headerText="First Name">  
+                    <p:column headerText="First Name" sortBy="firstName">  
                         <h:outputText value="#{actor.firstName}" />  
-                    </p:column>  
+                    </p:column>
 
-                    <p:column headerText="Last Name">  
+                    <p:column headerText="Last Name" sortBy="lastName">  
                         <h:outputText value="#{actor.lastName}" />  
-                    </p:column>  
+                    </p:column>
 
-                    <p:column headerText="Last Updated">  
+                    <p:column headerText="Last Updated" sortBy="lastUpdate">  
                         <h:outputText value="#{actor.lastUpdate}" />  
-                    </p:column>  
+                    </p:column>
                 </p:dataTable>
                 
                 
