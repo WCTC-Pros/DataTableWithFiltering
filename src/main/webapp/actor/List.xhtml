@@ -12,42 +12,70 @@
         </ui:define>
         <ui:define name="body">
             
+            <!-- Error message panel -->
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             
             <h:form id="form">
+                <!-- Actor DataTable -->
                 <p:dataTable id="actorTable" var="actor" value="#{actorBean.actors}"
                              paginator="true" rows="10" rowsPerPageTemplate="10,20,25" 
-                             pageLinks="5" sortMode="multiple">
+                             pageLinks="5" sortMode="multiple" resizableColumns="true"
+                             editable="true">
                     <f:facet name="header">
                         <h:outputText value="Actor Data"/>
                     </f:facet>
                     <p:column headerText="Id" sortBy="actorId">  
-                        <h:outputText value="#{actor.actorId}" />  
+                        <h:outputText value="#{actor.actorId}"/>
                     </p:column>
                     
                     <p:column headerText="First Name" sortBy="firstName">  
-                        <h:outputText value="#{actor.firstName}" />  
+                        
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{actor.firstName}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{actor.firstName}"/>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Last Name" sortBy="lastName">  
-                        <h:outputText value="#{actor.lastName}" />  
+                        
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{actor.lastName}" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{actor.lastName}"/>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Last Updated" sortBy="lastUpdate">  
-                        <h:outputText value="#{actor.lastUpdate}" />  
+                        <h:outputText value="#{actor.lastUpdate}"/>
                     </p:column>
                     
-                    <p:column style="width:4%" headerText="View">  
+                    <p:column headerText="Edit" style="width:3%">  
+                        <p:rowEditor />  
+                    </p:column>
+                    <p:column style="width:3%" headerText="View">  
                             <p:commandButton id="selectButton" update=":form:display" oncomplete="PF('actorDialog').show()" icon="ui-icon-search" title="View">  
                                 <f:setPropertyActionListener value="#{actor}" target="#{actorBean.selected}" />  
                         </p:commandButton>  
-                    </p:column> 
+                    </p:column>
+                    
+                    <f:facet name="footer">
+                        <h:outputText value="Found #{actorBean.actors.size()} records"/>
+                    </f:facet>
                 </p:dataTable>
+                <!-- End DataTable -->
                 
-                <p:dialog header="Actor Info" widgetVar="actorDialog" resizable="false" id="carDlg"  
-                showEffect="fade" hideEffect="fade" modal="true">  
+                <!-- Dialog(Window) shown on "View" button click -->
+                <p:dialog header="Actor Info" widgetVar="actorDialog" resizable="false" 
+                          id="carDlg" showEffect="blind" hideEffect="blind">  
   
                     <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
 
@@ -68,11 +96,9 @@
 
                         <h:outputText value="Last Updated:" />  
                         <h:outputText value="#{actorBean.selected.lastUpdate}" style="font-weight:bold"/>  
-
-                    </h:panelGrid>  
-
+                    </h:panelGrid>
                 </p:dialog>
-                
+                <!-- End "View" Dialog -->
                 
                 <h:link outcome="/index" value="#{bundle.ListActorIndexLink}"/>
             </h:form>
