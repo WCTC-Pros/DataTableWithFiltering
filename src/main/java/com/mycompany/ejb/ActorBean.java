@@ -3,7 +3,6 @@ package com.mycompany.ejb;
 import com.mycompany.entity.Actor;
 import com.mycompany.jsf.ActorController;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -16,6 +15,7 @@ public class ActorBean implements Serializable{
     private List<Actor> actors;
     @Inject
     private ActorController ac;
+    private Actor selected;
     
     public ActorBean(){
         
@@ -31,5 +31,14 @@ public class ActorBean implements Serializable{
 
     public void setActors(List<Actor> actors) {
         this.actors = actors;
-    }    
+    }
+
+    public Actor getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Actor selected) {
+        this.selected = selected;
+    }
+    
 }

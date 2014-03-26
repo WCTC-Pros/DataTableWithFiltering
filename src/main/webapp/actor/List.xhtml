@@ -16,7 +16,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             
-            <h:form>
+            <h:form id="form">
                 <p:dataTable id="actorTable" var="actor" value="#{actorBean.actors}"
                              paginator="true" rows="10" rowsPerPageTemplate="10,20,25" 
                              pageLinks="5" sortMode="multiple">
@@ -38,7 +38,40 @@
                     <p:column headerText="Last Updated" sortBy="lastUpdate">  
                         <h:outputText value="#{actor.lastUpdate}" />  
                     </p:column>
+                    
+                    <p:column style="width:4%" headerText="View">  
+                            <p:commandButton id="selectButton" update=":form:display" oncomplete="PF('actorDialog').show()" icon="ui-icon-search" title="View">  
+                                <f:setPropertyActionListener value="#{actor}" target="#{actorBean.selected}" />  
+                        </p:commandButton>  
+                    </p:column> 
                 </p:dataTable>
+                
+                <p:dialog header="Actor Info" widgetVar="actorDialog" resizable="false" id="carDlg"  
+                showEffect="fade" hideEffect="fade" modal="true">  
+  
+                    <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+
+                        <f:facet name="header">  
+                            <p:graphicImage value="http://www.politicspa.com/wp-content/uploads/2013/12/Silhouette-question-mark.jpeg" 
+                                            style="height: 60%; width: 50%;"/>
+                        </f:facet>  
+
+                        <h:outputText value="Id:" />  
+                        <h:outputText value="#{actorBean.selected.actorId}" style="font-weight:bold"/>  
+
+                        <h:outputText value="First Name:" />  
+                        <h:outputText value="#{actorBean.selected.firstName}" style="font-weight:bold"/>  
+
+
+                        <h:outputText value="Last Name:" />  
+                        <h:outputText value="#{actorBean.selected.lastName}" style="font-weight:bold"/>  
+
+                        <h:outputText value="Last Updated:" />  
+                        <h:outputText value="#{actorBean.selected.lastUpdate}" style="font-weight:bold"/>  
+
+                    </h:panelGrid>  
+
+                </p:dialog>
                 
                 
                 <h:link outcome="/index" value="#{bundle.ListActorIndexLink}"/>
