@@ -8,15 +8,19 @@
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListActorTitle}"></h:outputText>
+            <h:outputText value="#{bundle.ListActorTitle}"/>
         </ui:define>
         <ui:define name="body">
             <h:form>
-                <p:dataTable var="actor" value="#{actorBean.actors}">  
+                <p:dataTable id="actorTable" var="actor" value="#{actorBean.actors}"
+                             paginator="true" rows="10" rowsPerPageTemplate="10,20,25" pageLinks="5">
+                    <f:facet name="header">
+                        <h:outputText value="Actor Data"/>
+                    </f:facet>
                     <p:column headerText="Id">  
                         <h:outputText value="#{actor.actorId}" />  
                     </p:column>  
-
+                    
                     <p:column headerText="First Name">  
                         <h:outputText value="#{actor.firstName}" />  
                     </p:column>  
