@@ -22,15 +22,16 @@
                 <p:dataTable id="actorTable" var="actor" value="#{actorBean.actors}"
                              paginator="true" rows="10" rowsPerPageTemplate="10,20,25" 
                              pageLinks="5" sortMode="multiple" resizableColumns="true"
-                             editable="true">
+                             editable="true" filteredValue="#{actorBean.filteredActors}" >
                     <f:facet name="header">
                         <h:outputText value="Actor Data"/>
+                        
                     </f:facet>
-                    <p:column headerText="Id" sortBy="actorId">  
+                    <p:column headerText="Id" sortBy="actorId" filterBy="actorId">  
                         <h:outputText value="#{actor.actorId}"/>
                     </p:column>
                     
-                    <p:column headerText="First Name" sortBy="firstName">  
+                    <p:column headerText="First Name" sortBy="firstName" filterBy="firstName">  
                         
                         <p:cellEditor>
                             <f:facet name="output">
@@ -42,7 +43,7 @@
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="Last Name" sortBy="lastName">  
+                    <p:column headerText="Last Name" sortBy="lastName" filterBy="lastName">  
                         
                         <p:cellEditor>
                             <f:facet name="output">
@@ -54,7 +55,7 @@
                         </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="Last Updated" sortBy="lastUpdate">  
+                    <p:column headerText="Last Updated" sortBy="lastUpdate" filterBy="lastUpdate">  
                         <h:outputText value="#{actor.lastUpdate}"/>
                     </p:column>
                     

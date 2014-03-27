@@ -16,6 +16,7 @@ public class ActorBean implements Serializable{
     @Inject
     private ActorController ac;
     private Actor selected;
+    private List<Actor> filteredActors;
     
     public ActorBean(){
         
@@ -39,6 +40,14 @@ public class ActorBean implements Serializable{
 
     public void setSelected(Actor selected) {
         this.selected = selected;
+    }
+
+    public List<Actor> getFilteredActors() {
+        return filteredActors;
+    }
+
+    public void setFilteredActors(List<Actor> filteredActors) {
+        this.filteredActors = filteredActors;
     }
     
 }
